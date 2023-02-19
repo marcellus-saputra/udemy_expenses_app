@@ -47,10 +47,11 @@ class MyApp extends StatelessWidget {
               child: Column(
                 children: transactions.map((tx) {
                   return TransactionCard(
-                      id: tx.id,
-                      title: tx.title,
-                      amount: tx.amount,
-                      date: tx.date);
+                    id: tx.id,
+                    title: tx.title,
+                    amount: tx.amount,
+                    date: tx.date,
+                  );
                 }).toList(),
               ),
             ),

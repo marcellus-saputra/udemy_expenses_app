@@ -19,12 +19,29 @@ class TransactionCard extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            child: const Text('\$'),
+            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+            padding: const EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(5)),
+              border: Border.all(
+                color: Colors.purple,
+                width: 3,
+              ),
+            ),
+            child: Text(
+              amount.toString(),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+                color: Colors.purple,
+              ),
+            ),
           ),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(title),
-              Text(amount.toString()),
+              Text(date.toString()),
             ],
           )
         ],
