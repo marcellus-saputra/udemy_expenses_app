@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TransactionCard extends StatelessWidget {
   final String id;
@@ -29,7 +32,7 @@ class TransactionCard extends StatelessWidget {
               ),
             ),
             child: Text(
-              amount.toString(),
+              '\$$amount',
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 24,
@@ -40,8 +43,18 @@ class TransactionCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title),
-              Text(date.toString()),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                DateFormat.yMMMMEEEEd().format(date),
+                style: const TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
             ],
           )
         ],
