@@ -41,20 +41,22 @@ class _MainTransactionState extends State<MainTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Card(
-          elevation: 5,
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            child: InputField(addTransaction),
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Card(
+            elevation: 5,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              child: InputField(addTransaction),
+            ),
           ),
-        ),
-        Card(
-          child: TransactionList(transactions),
-        ),
-      ],
+          Card(
+            child: TransactionList(transactions),
+          ),
+        ],
+      ),
     );
   }
 }
