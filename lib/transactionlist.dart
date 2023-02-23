@@ -10,16 +10,18 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: txList.map((tx) {
+    return Container(
+      height: 300,
+      child: ListView.builder(
+        itemBuilder: (ctx, index) {
           return TransactionCard(
-            id: tx.id,
-            title: tx.title,
-            amount: tx.amount,
-            date: tx.date,
+            id: txList[index].id,
+            title: txList[index].title,
+            amount: txList[index].amount,
+            date: txList[index].date,
           );
-        }).toList(),
+        },
+        itemCount: txList.length,
       ),
     );
   }
