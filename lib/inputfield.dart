@@ -7,6 +7,20 @@ class InputField extends StatelessWidget {
 
   InputField(this.addTransaction);
 
+  void submitData() {
+    final inputTitle = titleController.text;
+    final inputAmount = double.parse(amountController.text);
+
+    if (inputTitle.isEmpty || inputAmount <= 0.0) {
+      return;
+    }
+
+    addTransaction(
+      inputTitle,
+      inputAmount,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,16 +34,20 @@ class InputField extends StatelessWidget {
           TextField(
             decoration: const InputDecoration(hintText: 'Amount'),
             controller: amountController,
+            keyboardType: TextInputType.number,
+            onSubmitted: (_) => submitData(),
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
-            child: ElevatedButton(
-              onPressed: () {
-                addTransaction(
-                  titleController.text,
-                  double.parse(amountController.text),
-                );
-              },
+            child: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                backgroundColor: Colors.white,
+                side: const BorderSide(
+                  width: 2,
+                  color: Colors.purple,
+                ),
+              ),
+              onPressed: submitData,
               child: const Text(
                 'Add Transaction',
                 style: TextStyle(color: Colors.purple),
