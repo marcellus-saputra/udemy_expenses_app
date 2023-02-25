@@ -27,16 +27,16 @@ class TransactionCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(5)),
               border: Border.all(
-                color: Colors.purple,
+                color: Theme.of(context).colorScheme.primary,
                 width: 3,
               ),
             ),
             child: Text(
               '\$${amount.toStringAsFixed(2)}',
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 24,
-                color: Colors.purple,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
           ),
@@ -45,9 +45,7 @@ class TransactionCard extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(context).textTheme.titleSmall,
               ),
               Text(
                 DateFormat.yMMMMEEEEd().format(date),
