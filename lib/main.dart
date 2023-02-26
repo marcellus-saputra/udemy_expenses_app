@@ -3,6 +3,7 @@ import 'package:udemy_expenses_app/inputfield.dart';
 
 import 'transactionlist.dart';
 import 'transaction.dart';
+import 'chart.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,19 +18,25 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final List<Transaction> transactions = [
-    Transaction(
-      id: 't1',
-      title: 'Shoes',
-      amount: 59.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Groceries',
-      amount: 21.12,
-      date: DateTime.now(),
-    ),
+    // Transaction(
+    //   id: 't1',
+    //   title: 'Shoes',
+    //   amount: 59.99,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Groceries',
+    //   amount: 21.12,
+    //   date: DateTime.now(),
+    // ),
   ];
+
+  List<Transaction> get recentTransactions {
+    return transactions.where((tx) {
+      return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
 
   void addTransaction(String title, double amount) {
     final newTx = Transaction(
@@ -96,13 +103,7 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Card(
-                elevation: 5,
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  child: InputField(addTransaction),
-                ),
-              ),
+              Chart(recentTransactions),
               Card(
                 child: TransactionList(transactions),
               ),
