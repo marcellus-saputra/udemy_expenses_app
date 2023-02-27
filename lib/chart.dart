@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:udemy_expenses_app/transaction.dart';
 import 'chartbar.dart';
 
@@ -24,7 +23,7 @@ class Chart extends StatelessWidget {
       }
 
       return {'day': DateFormat.E().format(weekDay), 'amount': totalAmount};
-    });
+    }).reversed.toList();
   }
 
   double get weeklySpending {
