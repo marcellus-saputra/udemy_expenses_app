@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class InputField extends StatefulWidget {
   final Function addTransaction;
@@ -11,8 +12,8 @@ class InputField extends StatefulWidget {
 
 class _InputFieldState extends State<InputField> {
   final titleController = TextEditingController();
-
   final amountController = TextEditingController();
+  DateTime? selectedDate;
 
   void submitData() {
     final inputTitle = titleController.text;
@@ -32,6 +33,20 @@ class _InputFieldState extends State<InputField> {
     Navigator.of(context).pop();
   }
 
+  void presentDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2019),
+      lastDate: DateTime.now(),
+    ).then((pickedDate) {
+      if (pickedDate == null) return;
+      setState(() {
+        selectedDate = pickedDate;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,14 +54,46 @@ class _InputFieldState extends State<InputField> {
       child: Column(
         children: [
           TextField(
-            decoration: const InputDecoration(hintText: 'Expenditure'),
+            decoration: const InputDecoration(
+              hintText: 'Expenditure',
+            ),
             controller: titleController,
           ),
           TextField(
-            decoration: const InputDecoration(hintText: 'Amount'),
+            decoration: const InputDecoration(
+              hintText: 'Amount',
+            ),
             controller: amountController,
             keyboardType: TextInputType.number,
             onSubmitted: (_) => submitData(),
+          ),
+          Row(
+            children: [
+              Text(
+                (selectedDate == null
+                    ? 'No date chosen'
+                    : DateFormat.yMMMd().format(selectedDate!)),
+                style: const TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontSize: 16,
+                ),
+              ),
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    side: const BorderSide(
+                      width: 2,
+                      color: Colors.purple,
+                    )),
+                onPressed: presentDatePicker,
+                child: const Text(
+                  'Choose date',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
@@ -59,9 +106,11 @@ class _InputFieldState extends State<InputField> {
                 ),
               ),
               onPressed: submitData,
-              child: const Text(
+              child: Text(
                 'Add Transaction',
-                style: TextStyle(color: Colors.purple),
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
             ),
           )
