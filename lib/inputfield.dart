@@ -16,18 +16,21 @@ class _InputFieldState extends State<InputField> {
   DateTime? selectedDate;
 
   void submitData() {
+    if (amountController.text.isEmpty) return;
+
     final inputTitle = titleController.text;
     final inputAmount = double.parse(amountController.text);
     titleController.clear();
     amountController.clear();
 
-    if (inputTitle.isEmpty || inputAmount <= 0.0) {
+    if (inputTitle.isEmpty || inputAmount <= 0.0 || selectedDate == null) {
       return;
     }
 
     widget.addTransaction(
       inputTitle,
       inputAmount,
+      selectedDate,
     );
 
     Navigator.of(context).pop();

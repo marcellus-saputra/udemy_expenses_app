@@ -38,15 +38,21 @@ class _MyAppState extends State<MyApp> {
     }).toList();
   }
 
-  void addTransaction(String title, double amount) {
+  void addTransaction(String title, double amount, DateTime selectedDate) {
     final newTx = Transaction(
         id: DateTime.now().toString(),
         title: title,
         amount: amount,
-        date: DateTime.now());
+        date: selectedDate);
 
     setState(() {
       transactions.add(newTx);
+    });
+  }
+
+  void deleteTransaction(String id) {
+    setState(() {
+      transactions.removeWhere((element) => element.id == id);
     });
   }
 
@@ -56,8 +62,8 @@ class _MyAppState extends State<MyApp> {
         builder: (_) {
           return GestureDetector(
             onTap: () {},
-            child: InputField(addTransaction),
             behavior: HitTestBehavior.opaque,
+            child: InputField(addTransaction),
           );
         });
   }
@@ -70,6 +76,7 @@ class _MyAppState extends State<MyApp> {
         colorScheme: Theme.of(context).colorScheme.copyWith(
               primary: Colors.purple,
               secondary: Colors.amber,
+              error: Colors.red,
             ),
         fontFamily: 'Quicksand',
         textTheme: ThemeData.light().textTheme.copyWith(
@@ -105,7 +112,7 @@ class _MyAppState extends State<MyApp> {
             children: [
               Chart(recentTransactions),
               Card(
-                child: TransactionList(transactions),
+                child: TransactionList(transactions, deleteTransaction),
               ),
             ],
           ),

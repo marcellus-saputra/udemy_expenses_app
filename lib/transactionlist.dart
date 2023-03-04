@@ -6,8 +6,9 @@ import 'txcard.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> txList;
+  final Function deleteHandler;
 
-  TransactionList(this.txList);
+  TransactionList(this.txList, this.deleteHandler);
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +40,7 @@ class TransactionList extends StatelessWidget {
                   title: txList[index].title,
                   amount: txList[index].amount,
                   date: txList[index].date,
+                  deleteHandler: deleteHandler,
                 );
               },
               itemCount: txList.length,
