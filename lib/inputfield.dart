@@ -56,47 +56,56 @@ class _InputFieldState extends State<InputField> {
       padding: const EdgeInsets.only(left: 5, right: 5, top: 5),
       child: Column(
         children: [
-          TextField(
-            decoration: const InputDecoration(
-              hintText: 'Expenditure',
-            ),
-            controller: titleController,
-          ),
-          TextField(
-            decoration: const InputDecoration(
-              hintText: 'Amount',
-            ),
-            controller: amountController,
-            keyboardType: TextInputType.number,
-            onSubmitted: (_) => submitData(),
-          ),
-          Row(
-            children: [
-              Text(
-                (selectedDate == null
-                    ? 'No date chosen'
-                    : DateFormat.yMMMd().format(selectedDate!)),
-                style: const TextStyle(
-                  fontFamily: 'OpenSans',
-                  fontSize: 16,
-                ),
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+            child: TextField(
+              decoration: const InputDecoration(
+                hintText: 'Expenditure',
               ),
-              OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    side: const BorderSide(
-                      width: 2,
-                      color: Colors.purple,
-                    )),
-                onPressed: presentDatePicker,
-                child: const Text(
-                  'Choose date',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+              controller: titleController,
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+            child: TextField(
+              decoration: const InputDecoration(
+                hintText: 'Amount',
+              ),
+              controller: amountController,
+              keyboardType: TextInputType.number,
+              onSubmitted: (_) => submitData(),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+            child: Row(
+              children: [
+                Text(
+                  (selectedDate == null
+                      ? 'No date chosen'
+                      : DateFormat.yMMMd().format(selectedDate!)),
+                  style: const TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontSize: 14,
                   ),
                 ),
-              ),
-            ],
+                OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      side: const BorderSide(
+                        width: 2,
+                        color: Colors.transparent,
+                      )),
+                  onPressed: presentDatePicker,
+                  child: const Text(
+                    'Choose date',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
